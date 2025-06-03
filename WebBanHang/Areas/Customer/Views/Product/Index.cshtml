@@ -1,0 +1,99 @@
+﻿@using WebBanHang.Areas.Customer.Models
+@model List<Product>
+<div class="row" style="margin-top:10px">
+    <div id="category-list" class="col-md-3">
+        <h3>CATEGORY LIST</h3>
+        <ul class="list-group">
+            @foreach (var c in (List<CategoryNew>)ViewBag.DSLOAI)
+            {
+                <a asp-action="Index" asp-route-catid="@c.Id" data-catid="@c.Id" class="catid-item list-group-item list-group-item-primary d-flex justify-content-between align-items-center">
+                    @c.Name
+                    <span class="badge bg-primary rounded-pill">@c.TotalProduct</span>
+                </a>
+            }
+        </ul>
+    </div>
+
+    <div id="product-list" class="col-md-9">
+        <h3 class="text-uppercase"> DANH SÁCH @ViewBag.CATEGORY_NAME</h3>
+        <div class="row">
+            @foreach (var p in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border border-dark shadow-sm">
+                        <h5 class="card-header">@p.Name</h5>
+                        <div class="card-body">
+                            <h6 class="card-title">Price: @string.Format("{0:#,#00} USD", p.Price)</h6>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(p.ImageUrl))
+                        {
+                            <img src="/@p.ImageUrl" class="img-fluid" />
+                        }
+                        else
+                        {
+                            <div class="text-center py-3">
+                                <span class="text-muted">No image available</span>
+                            </div>
+                        }
+
+                        <div class="card-footer text-muted d-flex justify-content-between">
+                            <a href="#" class="btn btn-detail-custom btn-sm">Detail</a>
+                            <a href="#" class="btn btn-addcart-custom btn-sm">Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(".catid-item").click(function (evt) {
+            evt.preventDefault();
+            let catid = $(this).data("catid");
+            $.ajax({
+                url: "/Customer/Product/LoadPartial",
+                data: { catid: catid },
+                success: function (data) {
+                    $("#product-list").html(data);
+                }
+            });
+        });
+    </script>
+    <style>
+        .btn-detail-custom {
+            background: #222;
+            color: #fff;
+            font-size: 1rem; /* Giảm font-size */
+            padding: 8px 20px; /* Giảm padding */
+            border-radius: 1.5rem; /* Bo tròn vừa phải */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            border: none;
+            font-weight: 500;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+            .btn-detail-custom:hover {
+                background: #111;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+            }
+
+        .btn-addcart-custom {
+            background: #6366f1;
+            color: #fff;
+            font-size: 1rem; /* Giảm font-size */
+            padding: 8px 20px; /* Giảm padding */
+            border-radius: 1.5rem; /* Bo tròn vừa phải */
+            box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+            border: none;
+            font-weight: 500;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+            .btn-addcart-custom:hover {
+                background: #4f46e5;
+                box-shadow: 0 4px 12px rgba(99,102,241,0.18);
+            }
+    </style>
+}
