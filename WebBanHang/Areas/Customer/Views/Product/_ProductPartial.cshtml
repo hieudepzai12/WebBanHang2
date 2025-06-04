@@ -25,7 +25,8 @@
 
                         <div class="card-footer text-muted d-flex justify-content-between">
                         <a href="#" class="btn btn-detail-custom btn-sm">Detail</a>
-                        <a href="#" class="btn btn-addcart-custom btn-sm">Add To Cart</a>
+                    <a class="addtocart card-link btn btn-outline-info" data-productId="@p.Id" asp-action="AddToCart" asp-controller="Cart"
+                       asp-route-productId="@p.Id"> Add to cart </a>
                     </div>
                 </div>
             </div>
@@ -49,20 +50,20 @@
                     box-shadow: 0 4px 12px rgba(0,0,0,0.18);
                 }
 
-            .btn-addcart-custom {
-                background: #6366f1;
-                color: #fff;
-                font-size: 1rem; /* Giảm font-size */
-                padding: 8px 20px; /* Giảm padding */
-                border-radius: 1.5rem; /* Bo tròn vừa phải */
-                box-shadow: 0 2px 8px rgba(99,102,241,0.10);
-                border: none;
-                font-weight: 500;
-                transition: background 0.2s, box-shadow 0.2s;
-            }
+    .btn-outline-info {
+        background: #6366f1;
+        color: #fff;
+        font-size: 1rem; /* Giảm font-size */
+        padding: 8px 20px; /* Giảm padding */
+        border-radius: 1.5rem; /* Bo tròn vừa phải */
+        box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+        border: none;
+        font-weight: 500;
+        transition: background 0.2s, box-shadow 0.2s;
+    }
 
-                .btn-addcart-custom:hover {
-                    background: #4f46e5;
-                    box-shadow: 0 4px 12px rgba(99,102,241,0.18);
-                }
+        .btn-outline-info:hover {
+            background: #4f46e5;
+            box-shadow: 0 4px 12px rgba(99,102,241,0.18);
+        }
         </style>

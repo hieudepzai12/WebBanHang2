@@ -39,7 +39,8 @@
 
                         <div class="card-footer text-muted d-flex justify-content-between">
                             <a href="#" class="btn btn-detail-custom btn-sm">Detail</a>
-                            <a href="#" class="btn btn-addcart-custom btn-sm">Add To Cart</a>
+                            <a class="addtocart card-link btn btn-outline-info" data-productId="@p.Id" asp-action="AddToCart" asp-controller="Cart"
+                               asp-route-productId="@p.Id"> Add to cart </a>
                         </div>
                     </div>
                 </div>
@@ -52,6 +53,8 @@
         $(".catid-item").click(function (evt) {
             evt.preventDefault();
             let catid = $(this).data("catid");
+          // Thêm class active cho mục đang chọn
+            $(this).addClass("active").siblings().removeClass("active");
             $.ajax({
                 url: "/Customer/Product/LoadPartial",
                 data: { catid: catid },
@@ -79,7 +82,7 @@
                 box-shadow: 0 4px 12px rgba(0,0,0,0.18);
             }
 
-        .btn-addcart-custom {
+        .btn-outline-info {
             background: #6366f1;
             color: #fff;
             font-size: 1rem; /* Giảm font-size */
@@ -91,7 +94,7 @@
             transition: background 0.2s, box-shadow 0.2s;
         }
 
-            .btn-addcart-custom:hover {
+            .btn-outline-info:hover {
                 background: #4f46e5;
                 box-shadow: 0 4px 12px rgba(99,102,241,0.18);
             }

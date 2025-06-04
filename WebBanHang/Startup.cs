@@ -39,6 +39,7 @@ namespace WebBanHang
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.LogoutPath = "//Identity/Account/Logout";
             });
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +61,7 @@ namespace WebBanHang
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
