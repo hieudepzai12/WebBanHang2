@@ -71,7 +71,7 @@ namespace WebBanHang
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                   pattern: "{area=Customer}/{controller=Product}/{action=Index}/{id?}");
+                   pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
             });
