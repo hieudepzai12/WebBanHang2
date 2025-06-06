@@ -14,14 +14,13 @@ let showQuantiyCart = () => {
         }
     });
 }
-$(".addtocart").click(function (evt) {
+$(document).on("click", ".addtocart", function (evt) {
     evt.preventDefault();
     let id = $(this).attr("data-productId");
     $.ajax({
         url: "/customer/cart/AddToCart",
         data: { "productId": id },
         success: function (data) {
-            //thong bao ket qua
             Swal.fire({
                 title: "Product added to cart",
                 text: "You clicked the button!",
@@ -30,4 +29,4 @@ $(".addtocart").click(function (evt) {
             showQuantiyCart();
         }
     });
-})
+});
